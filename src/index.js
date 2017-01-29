@@ -1,7 +1,13 @@
 import Vue from 'vue';
-import App from './App.vue';
+import router from './router';
+import store from './store';
 
-new Vue({
-  el: '#root',
-  render: h => h(App)
+const app = new Vue({
+    template: `<router-view></router-view>`,
+    store,
+    router
 });
+
+
+// go!!!
+app.$mount('#root');
