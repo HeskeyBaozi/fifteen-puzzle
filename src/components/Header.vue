@@ -1,8 +1,12 @@
 <template>
     <div class="header">
         <el-menu default-active="1" mode="horizontal" class="menu">
-            <el-menu-item class="menu-item" index="1">Game</el-menu-item>
-            <el-menu-item class="menu-item" index="2">About</el-menu-item>
+            <el-menu-item class="menu-item" index="1">
+                <router-link to="/game">Game</router-link>
+            </el-menu-item>
+            <el-menu-item class="menu-item" index="2">
+                <router-link to="/about">About</router-link>
+            </el-menu-item>
         </el-menu>
     </div>
 </template>

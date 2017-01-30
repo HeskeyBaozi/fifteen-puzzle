@@ -20,9 +20,10 @@
     }
 
     .content {
-        width: 300px;
-        height: 500px;
+        width: 400px;
+        height: min-content;
         background-color: rgb(243, 243, 243);
+        padding: 10px;
     }
 
     .center {
