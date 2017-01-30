@@ -12,37 +12,45 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-                        // the "scss" and "sass" values for the lang attribute to the right configs here.
-                        // other preprocessors should work out of the box, no loader config like this nessessary.
-                        'scss': 'vue-style-loader!css-loader!sass-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-                    },
-                    cssModules: {
-                        localIdentName: '[path][name]---[local]---[hash:base64:5]',
-                        camelCase: true
-                    },
-                    postcss: [require('postcss-cssnext')()]
-                }
+                use: ['vue-loader']
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
+                use: ['babel-loader'],
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]?[hash]'
-                }
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        root: path.resolve(__dirname, 'src'),
+                        attrs: ['img:src', 'link:href']
+                    }
+                }]
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', {loader: 'css-loader', options: {modules: true}}]
+                use: ['style-loader', 'css-loader', 'postcss-loader']
+            },
+            {
+                test: /favicon\.png$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]?[hash]'
+                    }
+                }]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+                exclude: /favicon\.png$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000
+                    }
+                }]
             }
         ]
     },
