@@ -1,15 +1,21 @@
 <template>
-    <div class="layout main-flex-container">
+    <div class="layout">
         <header>
             <el-menu default-active="1" mode="horizontal" class="menu">
                 <el-menu-item class="menu-item" index="1">Game</el-menu-item>
                 <el-menu-item class="menu-item" index="2">About</el-menu-item>
             </el-menu>
         </header>
-        <main>
-            <router-view></router-view>
-        </main>
-        <footer>Footer</footer>
+        <div class="main">
+            <div class="content center">
+                <router-view></router-view>
+            </div>
+        </div>
+        <footer>
+            <div class="center">
+                Heskey Baozi
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -33,17 +39,15 @@
         min-height: 100vh;
     }
 
-    .main-flex-container {
-        display: flex;
-        flex-flow: column nowrap;
-    }
-
     header {
         height: 60px;
         padding: 0 60px;
         box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
         background-color: rgb(243, 243, 243);
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         z-index: 1;
     }
 
@@ -76,5 +80,43 @@
         background-color: rgba(255, 255, 255, 0);
     }
 
+    .main {
+        padding: 0 60px;
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+    }
 
+    .content {
+        width: 300px;
+        height: 500px;
+        background-color: rgb(243, 243, 243);
+    }
+
+    .center {
+        margin: auto;
+    }
+
+    footer {
+        position: fixed;
+        display: flex;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(243, 243, 243, 0.64);
+        z-index: 1;
+        height: 40px;
+    }
+
+    footer:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        filter: blur(40px);
+        background: url('../assets/simple.jpg') 0 / cover fixed;
+    }
 </style>
