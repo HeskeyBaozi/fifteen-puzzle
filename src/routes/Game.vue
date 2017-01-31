@@ -3,17 +3,20 @@
         <h1>Fifteen Puzzle</h1>
         <div class="graph">
             <puzzle-block
-                    v-for="position of map"
+                    v-for="(position, index) in map"
                     :key="position"
                     :position="position"
-                    :imgPromise="imgPromise"/>
+                    :index="index"
+                    :imgPromise="imgPromise"
+                    :movableBlockIndexArray="movableBlockIndexArray"
+            />
         </div>
         <el-button type="primary">test</el-button>
     </div>
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapState, mapGetters} from 'vuex';
     import PuzzleBlock from '../components/PuzzleBlock.vue';
 
     export default {
@@ -22,6 +25,9 @@
             ...mapState({
                 map: ({game}) => game.map,
                 imgUrl: ({game}) => game.currentImg
+            }),
+            ...mapGetters({
+                movableBlockIndexArray: 'game/movableBlockIndexArray'
             }),
             imgPromise: function () {
                 const imgObject = new Image();
@@ -45,13 +51,8 @@
         flex-flow: column nowrap;
     }
 
-    .cache-image {
-        display: none;
-    }
-
     .graph {
-        display: flex;
-        flex-flow: row wrap;
+        position: relative;
         margin: 0 -10px;
         width: 400px;
         height: 400px;
